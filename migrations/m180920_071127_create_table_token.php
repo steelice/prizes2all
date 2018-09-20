@@ -13,7 +13,7 @@ class m180920_071127_create_table_token extends Migration
 
         $this->createTable('{{%token}}', [
             'user_id' => $this->integer()->notNull(),
-            'code' => $this->string()->notNull(),
+            'code' => $this->string(32)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'type' => $this->smallInteger()->notNull(),
         ], $tableOptions);

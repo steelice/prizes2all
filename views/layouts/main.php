@@ -36,25 +36,36 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $widgetItems = [
+        ['label' => Yii::t('app', 'Главная'), 'url' => Yii::$app->homeUrl],
+        ['label' => Yii::t('app', 'О компании'), 'url' => ['/site/about']],
+        ['label' => Yii::t('app', 'Контакты'), 'url' => ['/site/contact']],
+    ];
+
+    if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin) {
+        $widgetItems[] = [
+            'label' => Yii::t('app', 'Администрация'),
+            'url' => ['/manage']
+        ];
+    }
+
+    $widgetItems[] = Yii::$app->user->isGuest ? (
+    ['label' => 'Войти', 'url' => ['/user/security/login']]
+    ) : (
+        '<li>'
+        . Html::beginForm(['/user/security/logout'], 'post')
+        . Html::submitButton(
+            Yii::t('app', 'Выйти ({email})', ['email' => Yii::$app->user->identity->email]),
+            ['class' => 'btn btn-link logout']
+        )
+        . Html::endForm()
+        . '</li>'
+    );
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => Yii::t('app', 'Главная'), 'url' => Yii::$app->homeUrl],
-            ['label' => Yii::t('app', 'О компании'), 'url' => ['/site/about']],
-            ['label' => Yii::t('app', 'Контакты'), 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-            ['label' => 'Войти', 'url' => ['/user/security/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/user/security/logout'], 'post')
-                . Html::submitButton(
-                    Yii::t('app', 'Выйти ({email})', ['email' => Yii::$app->user->identity->email]),
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => $widgetItems
     ]);
     NavBar::end();
     ?>

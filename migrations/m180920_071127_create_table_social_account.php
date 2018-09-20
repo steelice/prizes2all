@@ -17,7 +17,7 @@ class m180920_071127_create_table_social_account extends Migration
             'provider' => $this->string()->notNull(),
             'client_id' => $this->string()->notNull(),
             'data' => $this->text(),
-            'code' => $this->string(),
+            'code' => $this->string(32),
             'created_at' => $this->integer(),
             'email' => $this->string(),
             'username' => $this->string(),

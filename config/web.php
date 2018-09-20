@@ -4,10 +4,11 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'prizes2all',
+    'name' => 'Prizes2All',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'ru',
+    'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -48,12 +49,35 @@ $config = [
             ],
         ],
 
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                    ],
+                ],
+            ],
+        ],
+
     ],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
+            'enableConfirmation' => false,
+            'enableUnconfirmedLogin' => true,
             'admins' => ['admin']
         ],
+        'manage' => [
+            'class' => 'app\modules\manage\Module',
+        ],
+    ],
+    'container' => [
+        'definitions' => [
+            'yii\grid\ActionColumn' => [
+                'template' => '{update} {delete}',
+            ],
+        ]
     ],
     'params' => $params,
 ];
@@ -64,14 +88,22 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.56.1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.56.1'],
+        'generators' => [ //here
+            'crud' => [
+                'class' => 'yii\gii\generators\crud\Generator',
+                'templates' => [
+                    'adminlte' => '@vendor/dmstr/yii2-adminlte-asset/gii/templates/crud/simple',
+                ]
+            ]
+        ],
     ];
 }
 
