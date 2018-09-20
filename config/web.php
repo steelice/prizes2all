@@ -71,6 +71,9 @@ $config = [
         'manage' => [
             'class' => 'app\modules\manage\Module',
         ],
+        'api' => [
+            'class' => \app\modules\api\Module::class
+        ]
     ],
     'container' => [
         'definitions' => [
