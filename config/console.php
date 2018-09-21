@@ -26,6 +26,27 @@ $config = [
             ],
         ],
         'db' => $db,
+        'settings' => [
+            'class' => \app\components\Settings::class
+        ],
+        'prize' => [
+            'class' => \app\components\PrizeStorage::class
+        ],
+        'money' => [
+            'class' => \app\components\MoneyStorage::class
+        ],
+        'bankAPI' => [
+            'class' => \app\components\BankAPI::class,
+            'apiKey' => 'BANK API KEY HERE (JUST FOR EXAMPLE)'
+        ],
+    ],
+    'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableConfirmation' => false,
+            'enableUnconfirmedLogin' => true,
+            'admins' => ['admin']
+        ],
     ],
     'params' => $params,
     'controllerMap' => [
