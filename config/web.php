@@ -60,6 +60,14 @@ $config = [
             ],
         ],
 
+        'settings' => [
+            'class' => \app\components\Settings::class,
+        ],
+
+        'prize' => [
+            'class' => \app\components\PrizeStorage::class
+        ]
+
     ],
     'modules' => [
         'user' => [

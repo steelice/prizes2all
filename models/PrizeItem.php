@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "prizeItem".
@@ -21,6 +22,11 @@ class PrizeItem extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'prizeItem';
+    }
+
+    public static function getRandom(): ?PrizeItem
+    {
+        return self::find()->orderBy(new Expression('RAND()'))->one();
     }
 
     /**

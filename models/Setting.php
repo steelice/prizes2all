@@ -15,6 +15,10 @@ use Yii;
  */
 class Setting extends \yii\db\ActiveRecord
 {
+    public const MONEY = 'money';
+    public const MONEY_MIN = 'money_min';
+    public const MONEY_MAX = 'money_max';
+
     /**
      * {@inheritdoc}
      */

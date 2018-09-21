@@ -7,6 +7,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
                 'items' => [
 //                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => Yii::t('app', 'Призы'), 'icon' => 'star', 'url' => ['prizes/index']],
                     ['label' => Yii::t('app', 'Предметы'), 'icon' => 'archive', 'url' => ['items/index']],
                     ['label' => Yii::t('app', 'Настройки'), 'icon' => 'cog', 'url' => ['settings/index']],
                     [
