@@ -23,11 +23,11 @@ use Yii;
  */
 class PrizeUser extends \yii\db\ActiveRecord
 {
-    public const STATUS_NEW = 'new';
-    public const STATUS_ACCEPTED = 'accepted';
-    public const STATUS_SENT = 'sent';
-    public const STATUS_ERROR = 'error';
-    public const STATUS_CANCELLED = 'cancelled';
+    const STATUS_NEW = 'new';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_SENT = 'sent';
+    const STATUS_ERROR = 'error';
+    const STATUS_CANCELLED = 'cancelled';
 
     /**
      * {@inheritdoc}

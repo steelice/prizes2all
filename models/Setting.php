@@ -15,12 +15,12 @@ use Yii;
  */
 class Setting extends \yii\db\ActiveRecord
 {
-    public const MONEY = 'money';
-    public const MONEY_MIN = 'money_min';
-    public const MONEY_MAX = 'money_max';
-    public const BONUS_MIN = 'bonus_min';
-    public const BONUS_MAX = 'bonus_max';
-    public const BONUS_RATE = 'bonus_rate';
+    const MONEY = 'money';
+    const MONEY_MIN = 'money_min';
+    const MONEY_MAX = 'money_max';
+    const BONUS_MIN = 'bonus_min';
+    const BONUS_MAX = 'bonus_max';
+    const BONUS_RATE = 'bonus_rate';
 
     /**
      * {@inheritdoc}

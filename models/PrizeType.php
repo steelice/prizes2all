@@ -17,9 +17,9 @@ use Yii;
  */
 class PrizeType extends \yii\db\ActiveRecord
 {
-    public const MONEY_INDEX = 'money';
-    public const BONUS_INDEX = 'bonus';
-    public const ITEM_INDEX = 'item';
+    const MONEY_INDEX = 'money';
+    const BONUS_INDEX = 'bonus';
+    const ITEM_INDEX = 'item';
 
     /**
      * {@inheritdoc}
