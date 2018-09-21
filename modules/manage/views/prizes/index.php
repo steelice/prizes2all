@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             $str .= Yii::t('app', '<span class="label label-info">{money} бонусов</span>', ['money' => $model->value]);
                             break;
                         case \app\models\PrizeType::ITEM_INDEX:
-                            $str .= $model->item->name;
+                            $str .= '<span class="label label-default">' . $model->item->name . '</span>';
                             break;
                     }
 

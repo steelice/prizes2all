@@ -80,7 +80,16 @@ $config = [
             'class' => 'dektrium\user\Module',
             'enableConfirmation' => false,
             'enableUnconfirmedLogin' => true,
-            'admins' => ['admin']
+            'admins' => ['admin'],
+            'controllerMap' => [
+                'registration' => [
+                    'class' => \dektrium\user\controllers\RegistrationController::class,
+                    'on ' . \dektrium\user\controllers\RegistrationController::EVENT_AFTER_REGISTER => function ($e) {
+                        Yii::$app->response->redirect(array('/user/security/login'))->send();
+                        Yii::$app->end();
+                    }
+                ],
+            ],
         ],
         'manage' => [
             'class' => 'app\modules\manage\Module',
