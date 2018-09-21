@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "fb70a6b2c60d2e23ec5dd97ae3ccbb7b",
+  "content-hash": "e8bd5e3a63d5e030a7acc53fcb4a87d0",
   "packages": [
     {
       "name": "almasaeed2010/adminlte",
@@ -49,55 +49,6 @@
         "web"
       ],
       "time": "2018-07-15T18:48:11+00:00"
-    },
-    {
-      "name": "bizley/migration",
-      "version": "3.0.2",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/bizley/yii2-migration.git",
-        "reference": "05cf2734f85a38a7fa5920f43bef2f9a87599b6d"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/bizley/yii2-migration/zipball/05cf2734f85a38a7fa5920f43bef2f9a87599b6d",
-        "reference": "05cf2734f85a38a7fa5920f43bef2f9a87599b6d",
-        "shasum": ""
-      },
-      "require": {
-        "ext-mbstring": "*",
-        "php": ">=7.1.0",
-        "yiisoft/yii2": ">=2.0.15.1 <2.1.0"
-      },
-      "require-dev": {
-        "phpunit/phpunit": "~7.3.1",
-        "roave/security-advisories": "dev-master"
-      },
-      "type": "yii2-extension",
-      "autoload": {
-        "psr-4": {
-          "bizley\\migration\\": ""
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "Apache-2.0"
-      ],
-      "authors": [
-        {
-          "name": "Pawel Bizley Brzozowski",
-          "email": "pawel@positive.codes"
-        }
-      ],
-      "description": "Migration generator for Yii 2.",
-      "keywords": [
-        "console",
-        "generator",
-        "migrate",
-        "migration",
-        "yii2"
-      ],
-      "time": "2018-09-10T18:17:44+00:00"
     },
     {
       "name": "bower-asset/bootstrap",
@@ -845,16 +796,16 @@
     },
     {
       "name": "yiisoft/yii2-authclient",
-      "version": "2.1.6",
+      "version": "2.1.7",
       "source": {
         "type": "git",
         "url": "https://github.com/yiisoft/yii2-authclient.git",
-        "reference": "573a00211fb95e860647999e3c82808dcad526df"
+        "reference": "51ed208515a2d04c538b2c498c4f760481a431b5"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/573a00211fb95e860647999e3c82808dcad526df",
-        "reference": "573a00211fb95e860647999e3c82808dcad526df",
+        "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/51ed208515a2d04c538b2c498c4f760481a431b5",
+        "reference": "51ed208515a2d04c538b2c498c4f760481a431b5",
         "shasum": ""
       },
       "require": {
@@ -893,7 +844,7 @@
         "oauth",
         "yii2"
       ],
-      "time": "2018-09-06T21:30:50+00:00"
+      "time": "2018-09-20T07:23:55+00:00"
     },
     {
       "name": "yiisoft/yii2-bootstrap",
@@ -3712,7 +3663,7 @@
   "prefer-stable": false,
   "prefer-lowest": false,
   "platform": {
-    "php": ">=7.1.0"
+    "php": ">=7.0.0"
   },
   "platform-dev": []
 }
