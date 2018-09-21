@@ -35,9 +35,9 @@ class PrizeType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'title', 'description'], 'required'],
+            [['name', 'title', 'description', 'chance'], 'required'],
             [['description'], 'string'],
-            [['chance'], 'integer'],
+            [['chance'], 'integer', 'min' => 1, 'max' => 1000],
             [['name'], 'string', 'max' => 20],
             [['title'], 'string', 'max' => 100],
             [['name'], 'unique'],
@@ -52,9 +52,9 @@ class PrizeType extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Внутреннее имя'),
-            'title' => Yii::t('app', 'Тип'),
+            'title' => Yii::t('app', 'Заголовок'),
             'description' => Yii::t('app', 'Описание приза'),
-            'chance' => Yii::t('app', 'Шанс выпадения'),
+            'chance' => Yii::t('app', 'Шанс выпадения (%)'),
         ];
     }
 
