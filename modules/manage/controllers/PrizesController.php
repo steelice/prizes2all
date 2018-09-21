@@ -55,6 +55,11 @@ class PrizesController extends Controller
     public function actionSend($id)
     {
         $prize = $this->findModel($id);
+        // вначале, помечаем приз как одобренный. Чтобы в случае ошибки его можно было переотправить
+        $prize->status = PrizeUser::STATUS_ACCEPTED;
+        $prize->save();
+
+        // отправляем с помощью фабрики, которая создаст нужный компонент для отправки в зависимости от типа приза
         $delivery = DeliveryFactory::getDelivery($prize);
         $delivery->delivery();
 

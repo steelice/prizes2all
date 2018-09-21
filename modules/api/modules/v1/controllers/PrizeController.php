@@ -31,12 +31,15 @@ class PrizeController extends Controller
         return $behaviors;
     }
 
-    public function actionGet()
+    public function actionGet(): array
     {
-        $myPrize = \Yii::$app->prize->takeRandom(\Yii::$app->user->identity);
-        $myPrize->getType();
+        try {
+            $myPrize = \Yii::$app->prize->takeRandom(\Yii::$app->user->identity);
+        } catch (\Exception $e) {
+            return ['success' => false];
+        }
 
-        return $myPrize;
+        return $this->prizeInfo($myPrize);
     }
 
     /**
@@ -46,14 +49,14 @@ class PrizeController extends Controller
      * @return PrizeUser
      * @throws NotFoundHttpException
      */
-    public function actionUpdateData($id): PrizeUser
+    public function actionUpdateData($id): array
     {
         $prize = $this->getMyPrize($id);
 
         $prize->userNotes = \Yii::$app->request->post('userNotes');
         $prize->save();
 
-        return $prize;
+        return $this->prizeInfo($prize);
     }
 
     /**
@@ -64,7 +67,7 @@ class PrizeController extends Controller
      * @throws NotFoundHttpException
      * @throws \Exception
      */
-    public function actionCancel($id): PrizeUser
+    public function actionCancel($id): array
     {
         $prize = $this->getMyPrize($id);
 
@@ -72,7 +75,29 @@ class PrizeController extends Controller
 
         $delivery->cancel();
 
-        return $prize;
+        return $this->prizeInfo($prize);
+    }
+
+    /**
+     * Возвращает инфу о призе с необходимыми атрибутами
+     *
+     * @param PrizeUser $prize
+     * @return array
+     */
+    public function prizeInfo(PrizeUser $prize): array
+    {
+        if ($prize->firstErrors) {
+            return [
+                'success' => false,
+                'errors' => $prize->firstErrors
+            ];
+        }
+        return [
+            'success' => true,
+            'prize' => $prize->getAttributes(['id', 'status', 'value']),
+            'type' => $prize->type->getAttributes(['name', 'title', 'description']),
+            'item' => $prize->item ? $prize->item->getAttributes(['name']) : null
+        ];
     }
 
     /**

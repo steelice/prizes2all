@@ -61,11 +61,17 @@ $config = [
         ],
 
         'settings' => [
-            'class' => \app\components\Settings::class,
+            'class' => \app\components\Settings::class
         ],
-
         'prize' => [
             'class' => \app\components\PrizeStorage::class
+        ],
+        'money' => [
+            'class' => \app\components\MoneyStorage::class
+        ],
+        'bankAPI' => [
+            'class' => \app\components\BankAPI::class,
+            'apiKey' => 'BANK API KEY HERE (JUST FOR EXAMPLE)'
         ]
 
     ],
@@ -88,6 +94,9 @@ $config = [
             'yii\grid\ActionColumn' => [
                 'template' => '{update} {delete}',
             ],
+        ],
+        'singletons' => [
+            \app\components\Settings::class => []
         ]
     ],
     'params' => $params,

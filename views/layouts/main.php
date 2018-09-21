@@ -50,18 +50,19 @@ AppAsset::register($this);
         ];
     }
 
-    $widgetItems[] = Yii::$app->user->isGuest ? (
-    ['label' => 'Войти', 'url' => ['/user/security/login']]
-    ) : (
-        '<li>'
-        . Html::beginForm(['/user/security/logout'], 'post')
-        . Html::submitButton(
-            Yii::t('app', 'Выйти ({email})', ['email' => Yii::$app->user->identity->email]),
-            ['class' => 'btn btn-link logout']
-        )
-        . Html::endForm()
-        . '</li>'
-    );
+    if (Yii::$app->user->isGuest) {
+        $widgetItems[] = ['label' => 'Войти', 'url' => ['/user/security/login']];
+    } else {
+        $widgetItems[] = ['label' => Yii::t('app', 'Бонусы: {bonuses}', ['bonuses' => Yii::$app->user->identity->bonuses]), 'url' => '#'];
+        $widgetItems[] = '<li>'
+            . Html::beginForm(['/user/security/logout'], 'post')
+            . Html::submitButton(
+                Yii::t('app', 'Выйти ({email})', ['email' => Yii::$app->user->identity->email]),
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

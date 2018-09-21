@@ -24,9 +24,14 @@ class PrizeItem extends \yii\db\ActiveRecord
         return 'prizeItem';
     }
 
+    /**
+     * Возвращает случайный свободный приз-предмет
+     *
+     * @return PrizeItem|null
+     */
     public static function getRandom(): ?PrizeItem
     {
-        return self::find()->orderBy(new Expression('RAND()'))->one();
+        return self::find()->where(['taken' => 0])->orderBy(new Expression('RAND()'))->one();
     }
 
     /**

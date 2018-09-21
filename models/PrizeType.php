@@ -63,7 +63,7 @@ class PrizeType extends \yii\db\ActiveRecord
      */
     public function getPrizeUsers()
     {
-        return $this->hasMany(PrizeUser::className(), ['typeId' => 'id']);
+        return $this->hasMany(PrizeUser::class, ['typeId' => 'id']);
     }
 
     /**
@@ -75,12 +75,12 @@ class PrizeType extends \yii\db\ActiveRecord
     {
         try {
             if (self::MONEY_INDEX === $this->name) {
-                return random_int(Yii::$app->settings->get('money_min'),
-                    max(Yii::$app->settings->get('money_max'), Yii::$app->settings->get('money')));
+                return Yii::$app->money->randomValue();
             }
 
+            // по-хорошему для бонусов бы тоже сделать хранилище, но я думаю примера сойдет и так
             if (self::BONUS_INDEX === $this->name) {
-                return random_int(Yii::$app->settings->get('bonus_min'), Yii::$app->setting->get('bonus_max'));
+                return random_int(Yii::$app->settings->get(Setting::BONUS_MIN), Yii::$app->settings->get(Setting::BONUS_MAX));
             }
 
         } catch (\Exception $e) {

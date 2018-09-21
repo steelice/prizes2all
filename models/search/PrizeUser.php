@@ -40,12 +40,13 @@ class PrizeUser extends PrizeUserModel
      */
     public function search($params)
     {
-        $query = PrizeUserModel::find();
+        $query = PrizeUserModel::find()->with('user', 'item', 'type');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);

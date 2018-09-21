@@ -6,8 +6,6 @@ namespace app\components;
 use app\models\PrizeItem;
 use app\models\PrizeType;
 use app\models\PrizeUser;
-use app\models\Setting;
-use app\models\Transaction;
 use app\models\User;
 use yii\base\Component;
 use yii\base\Exception;
@@ -16,10 +14,12 @@ class PrizeStorage extends Component
 {
 
     protected $settings;
+    protected $money;
 
-    public function __construct(Settings $settings, array $config = [])
+    public function __construct(Settings $settings, MoneyStorage $money, array $config = [])
     {
         $this->settings = $settings;
+        $this->money = $money;
         parent::__construct($config);
     }
 
@@ -33,11 +33,9 @@ class PrizeStorage extends Component
         $prizesPool = [];
         $chancesSum = 0;
         $prizesAll = PrizeType::find()->indexBy('name')->all();
-        $moneyMin = $this->settings->get(Setting::MONEY_MIN);
-        $moneyMax = max($this->settings->get(Setting::MONEY_MAX), $this->settings->get(Setting::MONEY));
 
         // денежные призы добавляем в пул только при наличии денег
-        if (($moneyMax >= $moneyMin) && isset($prizesAll[PrizeType::MONEY_INDEX])) {
+        if (isset($prizesAll[PrizeType::MONEY_INDEX]) && $this->money->isAvailable()) {
             $chancesSum += $prizesAll[PrizeType::MONEY_INDEX]->chance;
             $prizesPool[PrizeType::MONEY_INDEX] = $chancesSum;
         }
@@ -107,8 +105,6 @@ class PrizeStorage extends Component
             $item->save();
         } else {
             $prize->value = $prizeType->getRandomValue();
-
-
         }
 
 
@@ -116,10 +112,9 @@ class PrizeStorage extends Component
             throw new Exception(\Yii::t('app', 'Невозможно сохранить ваш приз!'));
         }
 
-        // если приз денежный, то уменьшаем кол-во оставшихся денег и создаём транзакцию
+        // если приз денежный, то уменьшаем кол-во оставшихся денег (блокируем)
         if (PrizeType::MONEY_INDEX === $prizeType->name) {
-            Setting::updateAllCounters(['value' => -$prize->value], ['name' => Setting::MONEY]);
-            Transaction::log($prize);
+            \Yii::$app->money->block($prize->value);
         }
 
         $transaction->commit();

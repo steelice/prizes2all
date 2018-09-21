@@ -6,7 +6,6 @@ namespace app\components\delivery;
 use app\models\PrizeType;
 use app\models\PrizeUser;
 use app\models\Setting;
-use app\models\Transaction;
 use yii\db\Exception;
 
 class MoneyDelivery extends BaseDelivery implements DeliveryInterface
@@ -19,7 +18,8 @@ class MoneyDelivery extends BaseDelivery implements DeliveryInterface
      */
     public function delivery(): void
     {
-        Transaction::log($this->prize);
+        \Yii::$app->money->pay($this->prize);
+
         $this->prize->status = PrizeUser::STATUS_SENT;
         $this->prize->save();
     }
@@ -47,7 +47,7 @@ class MoneyDelivery extends BaseDelivery implements DeliveryInterface
             throw new Exception('Bonus prize type not found!');
         }
         $this->prize->typeId = $bonusType->id;
-        $this->prize->value = \Yii::$app->settings->get('bonus_rate') * $this->prize->value;
+        $this->prize->value = \Yii::$app->money->convertToBonus($this->prize->value);
         $this->prize->save();
         $this->prize->refresh(); // для обновления связи
 

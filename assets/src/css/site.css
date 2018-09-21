@@ -113,3 +113,14 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.roulette {
+    width: 500px;
+
+    margin: 0 auto;
+}
+
+.roulette .gamble {
+    font-size: 2em;
+    padding: 20px;
+}
