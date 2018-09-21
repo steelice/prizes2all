@@ -10,15 +10,16 @@
                     ['label' => Yii::t('app', 'Призы'), 'icon' => 'star', 'url' => ['prizes/index']],
                     ['label' => Yii::t('app', 'Предметы'), 'icon' => 'archive', 'url' => ['items/index']],
                     ['label' => Yii::t('app', 'Настройки'), 'icon' => 'cog', 'url' => ['settings/index']],
-                    [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                        ],
-                    ],
+//                    [
+//                        'label' => 'Some tools',
+//                        'icon' => 'share',
+//                        'url' => '#',
+//                        'items' => [
+//                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
+//                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
+//                        ],
+//
+//                    ],
                 ],
             ]
         ) ?>
