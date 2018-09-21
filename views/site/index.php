@@ -19,7 +19,22 @@ $this->title = 'ПСП - Получи Свой Приз!';
                 <li>Реальный товар! Самые лучшие китайские безделушки, прямо из алиэкспресса!</li>
                 <li>Бонусы в приложение! За них вы можете купить целую кучу ничего!</li>
             </ul>
-            <button class="gamble" type="button">Получить приз</button>
+
+            <?php
+            if (Yii::$app->user->isGuest):
+                ?>
+                <p>Для получения приза вам необходимо зарегистрироваться!</p>
+                <a class="btn btn-primary btn-lg btn-block" href="<?= \yii\helpers\Url::to(['user/register']) ?>">Регистрация</a>
+                <br>
+                <p>Если у вас уже есть аккаунт, то можно <a href="<?= \yii\helpers\Url::to(['user/login']) ?>">войти</a>
+                </p>
+            <?php
+            else:
+                ?>
+                <button class="gamble" type="button">Получить приз</button>
+            <?php
+            endif;
+            ?>
         </div>
 
         <div class="result hidden">
