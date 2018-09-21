@@ -2,6 +2,7 @@ var currentPrize = {id: null, type: null};
 
 function gamble() {
     var myBlock = $(this).closest('.roulette');
+    $(this).prop('disabled', true);
 
     $.post('/api/v1/prize/get', {}, function (data) {
         if (!data.success) {

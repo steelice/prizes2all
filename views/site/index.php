@@ -31,7 +31,7 @@ $this->title = 'ПСП - Получи Свой Приз!';
             <?php
             else:
                 ?>
-                <button class="gamble" type="button">Получить приз</button>
+                <button class="gamble btn btn-success btn-block" type="button">Получить приз</button>
             <?php
             endif;
             ?>
