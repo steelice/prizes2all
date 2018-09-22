@@ -5,6 +5,7 @@ namespace app\modules\api\modules\v1\controllers;
 
 use app\components\delivery\DeliveryFactory;
 use app\models\PrizeUser;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,6 +19,17 @@ class PrizeController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        $behaviors['access'] = [
+            'class' => AccessControl::class,
+            'rules' => [
+                [
+                    'actions' => ['get', 'update-data', 'cancel'],
+                    'allow' => true,
+                    'roles' => ['@'],
+                ],
+            ],
+        ];
 
         $behaviors['verbs'] = [
             'class' => VerbFilter::class,

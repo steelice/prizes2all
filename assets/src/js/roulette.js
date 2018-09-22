@@ -5,7 +5,7 @@ function gamble() {
     $(this).prop('disabled', true);
 
     $.post('/api/v1/prize/get', {}, function (data) {
-        if (!data.success) {
+        if ((typeof data.success === 'undefined') || !data.success) {
             alert('Произошла какая-то ошибка. Попробуйте перезагрузить страницу и попробовать ещё раз.');
             return;
         }
@@ -46,7 +46,7 @@ function sendNotes(evt) {
 
     $.post('/api/v1/prize/update-data?id=' + currentPrize.id, form.serialize(), function (data) {
         if (!data.success) {
-            alert('Произошла какая-то ошибка при отказе от подарка. Попробуйте перезагрузить страницу и попробовать ещё раз.');
+            alert('Произошла какая-то ошибка при отказе от подарка. Попробуйте перезагрузить страницу и попробуйте ещё раз.');
             return;
         }
 
@@ -58,6 +58,11 @@ function sendNotes(evt) {
 }
 
 $(function () {
+
+    $(document).ajaxError(function () {
+        alert('Произошла какая-то ошибка. Попробуйте перезагрузить страницу и попробовать ещё раз.');
+    });
+
     $('.roulette .gamble').on('click', gamble);
     $('.roulette .result .cancel').on('click', cancelPrize);
     $('.roulette .result .userNotes').on('submit', sendNotes);
